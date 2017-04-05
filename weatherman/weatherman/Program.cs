@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,7 +10,7 @@ namespace weatherman
 {
     class Program
     {
-        static string userName;
+
         //this is user greeting and asking for name input.
         static void Greeting()
         {
@@ -27,6 +29,16 @@ namespace weatherman
             Greeting();
             NameInput();
 
+            var zipCode = "";
+            var url = $"http://api.openweathermap.org/data/2.5/weather?zip="+(zipCode)+",us&id=524901&APPID=314e971b1dcd934fb6afedbf9353557c";
+            var request = WebRequest.Create(url);
+            var response = request.GetResponse();
+            var rawResponse = String.Empty;
+            using (var reader = new StreamReader(response.GetResponseStream()))
+            {
+                rawResponse = reader.ReadToEnd();
+                Console.WriteLine(rawResponse);
+            }
 
             Console.ReadLine();
         }
