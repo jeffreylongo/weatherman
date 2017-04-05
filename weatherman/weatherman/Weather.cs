@@ -8,10 +8,9 @@ namespace weatherman
 {
     public class Weather
     {
-        public double temp { get; set; }
-        public int humidity { get; set; }
-        public double pressure { get; set; }
-        public double temp_min { get; set; }
-        public double temp_max { get; set; }
+        public int id { get; set; }
+        public string main { get; set; }
+        public string description { get; set; }
+        public string icon { get; set; }
     }
 }

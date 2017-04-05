@@ -40,14 +40,11 @@ namespace weatherman
             using (var reader = new StreamReader(response.GetResponseStream()))
             {
                 rawResponse = reader.ReadToEnd();
-                //Console.WriteLine(rawResponse);
+                Console.WriteLine(rawResponse);
             }
-            var weather = JsonConvert.DeserializeObject<Weather>(rawResponse);
+            var weather = JsonConvert.DeserializeObject<>(rawResponse);
 
-            Console.WriteLine(weather.temp);
-            Console.WriteLine(weather.temp_max);
-            Console.WriteLine(weather.temp_min);
-            Console.WriteLine(weather.humidity);
+
 
             Console.ReadLine();
         }
