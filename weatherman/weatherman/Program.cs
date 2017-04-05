@@ -33,7 +33,7 @@ namespace weatherman
             var zipCode = "";
             zipCode = Console.ReadLine();
 
-            var url = $"http://api.openweathermap.org/data/2.5/weather?zip="+(zipCode)+",us&id=524901&APPID=314e971b1dcd934fb6afedbf9353557c";
+            var url = $"http://api.openweathermap.org/data/2.5/weather?zip="+(zipCode)+ ",us&units=imperial&id=524901&APPID=314e971b1dcd934fb6afedbf9353557c";
             var request = WebRequest.Create(url);
             var response = request.GetResponse();
             var rawResponse = String.Empty;
@@ -42,12 +42,13 @@ namespace weatherman
                 rawResponse = reader.ReadToEnd();
                 //Console.WriteLine(rawResponse);
             }
-            var weatherDisplay = JsonConvert.DeserializeObject<Main>(rawResponse);
+            var weatherDisplay = JsonConvert.DeserializeObject<RootObject>(rawResponse);
 
-            Console.WriteLine(weatherDisplay.temp);
-            Console.WriteLine(weatherDisplay.temp_min);
-            Console.WriteLine(weatherDisplay.temp_max);
-            Console.WriteLine(weatherDisplay.humidity);
+            Console.WriteLine($"The current TEMPERATURE is: "+(weatherDisplay.main.temp));
+            Console.WriteLine($"The HIGH for today is: "+(weatherDisplay.main.temp_max));
+            Console.WriteLine($"The LOW for today is: " + (weatherDisplay.main.temp_min));
+            Console.WriteLine($"The current HUMIDITY is: " + (weatherDisplay.main.humidity));
+            Console.WriteLine($"Looks like today is: " + (weatherDisplay.weather.First().description));
 
 
             Console.ReadLine();
